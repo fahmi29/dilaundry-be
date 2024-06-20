@@ -64,13 +64,22 @@ class LaundryController extends Controller
         //     'email' => 'required|email|unique:users',
         //     // Tambahkan validasi lainnya sesuai kebutuhan
         // ]);
-        dd($request);
+        // dd(auth()->user());
+        
         $laundry = new Laundry();
-        $laundry->name = $request->name;
-        $laundry->email = $request->email;
-        // Tambahkan atribut lainnya sesuai kebutuhan
+        
+        $laundry->claim_code = uniqid();
+        // $laundry->user_id = auth()->user()->id;
+        // $laundry->shop_id = $request->shop_id;
+        $laundry->user_id = $request->user_id; // Set user_id to the id of the logged-in user
+        $laundry->shop_id = $request->shop_id;
+        $laundry->weight = $request->weight;
+        $laundry->total = 15000 * $request->weight; // Calculate price based on weight
+        $laundry->description = $request->weight." Sepatu";
+        $laundry->status = 'Process';
+        $laundry->date_pickup = now()->addDays(3); // Set date_pickup to 3 days from now
         $laundry->save();
 
-        return response()->json(['message' => 'Pengguna berhasil ditambahkan'], 201);
+        return response()->json(['message' => 'Success', 'statusCode' => 200], 201);
     }
 }

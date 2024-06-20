@@ -11,7 +11,7 @@ class Shop extends Model
 
     public function laundries() 
     {
-        return $this->hasMany(Laundry::class    );
+        return $this->hasMany(Laundry::class);
     }
 
     protected $table = 'shops';
