@@ -29,12 +29,12 @@ Route::get('/user', [UserController::class,'readAll']);
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
-Route::post('/laundry/post', [LaundryController::class,'post']);
 
 Route::middleware('auth:sanctum')->group(function() {
     // laundry
     Route::get('/laundry/user/{id}', [LaundryController::class,'whereUserId']);
     Route::post('/laundry/claim', [LaundryController::class,'claim']);
+    Route::post('/laundry/post', [LaundryController::class,'post']);
 
     // Promo
     Route::get('/promo/limit', [PromoController::class,'readLimit']);
